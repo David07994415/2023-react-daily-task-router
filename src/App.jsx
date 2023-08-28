@@ -1,5 +1,5 @@
 import './App.css';
-import { HashRouter, NavLink } from 'react-router-dom';
+import { HashRouter, NavLink, Routes, Route } from 'react-router-dom';
 
 const Todo = () => {
   return <p>這是 Todo 頁面</p>;
@@ -9,6 +9,10 @@ const Login = () => {
 };
 const Register = () => {
   return <p>這是註冊頁面</p>;
+};
+
+const Home = () => {
+  return <p>這是首頁面</p>;
 };
 
 function App() {
@@ -29,8 +33,22 @@ function App() {
             <p>Todo 頁面</p>
           </NavLink>
         </div>
+        <Routes>
+          <Route extra path="/" element={<Home />} />
+          <Route path="/register" element={<Register />} />
+          <Route path="/login" element={<Login />} />
+          <Route path="/todo" element={<Todo />} />
+        </Routes>
         {/* Routes, Route 練習區 */}
         {/* 練習區 */}
+        {/* 可自行定義 404 Not Found 的頁面 */}
+        {/* <Route
+          path="*"
+          element={
+            <main style={{ padding: "1rem" }}>
+              <p>There's nothing here!</p>
+            </main>
+          } /> */}
       </HashRouter>
     </div>
   );
