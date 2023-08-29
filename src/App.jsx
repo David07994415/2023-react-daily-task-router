@@ -1,8 +1,17 @@
 import './App.css';
+import React from 'react'
 import { HashRouter, NavLink, Routes, Route } from 'react-router-dom';
+import { useNavigate, } from 'react-router-dom';
+import { useState, useEffect} from "react";
+
 
 const Todo = () => {
-  return <p>這是 Todo 頁面</p>;
+  const [islogin, setIsLogin] = useState(false);
+  useEffect(() => {
+    setIsLogin(true); 
+  }, []);
+  return <><Logout islogin={islogin}/>
+  <p>這是 Todo 頁面</p></>;
 };
 const Login = () => {
   return <p>這是登入頁面</p>;
@@ -10,7 +19,6 @@ const Login = () => {
 const Register = () => {
   return <p>這是註冊頁面</p>;
 };
-
 const Home = () => {
   return <p>這是首頁面</p>;
 };
@@ -36,7 +44,7 @@ function App() {
         <Routes>
           <Route extra path="/" element={<Home />} />
           <Route path="/register" element={<Register />} />
-          <Route path="/login" element={<Login />} />
+          <Route path="/login" element={<Login/>} />
           <Route path="/todo" element={<Todo />} />
         </Routes>
         {/* Routes, Route 練習區 */}
@@ -52,6 +60,16 @@ function App() {
       </HashRouter>
     </div>
   );
+}
+
+function Logout({islogin}) {
+  console.log(islogin);
+  const nav = useNavigate();
+  const btnlogout = () => { 
+    if (islogin) nav('/login')
+    else nav('/')
+  };
+  return <button onClick={ btnlogout }>登出按鈕</button>
 }
 
 export default App;
